@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Item list page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        div {
+            margin: 20px;
+        }
+
+        p {
+            margin: 10px 0;
+        }
+
+        .step-links {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .step-links a {
+            margin: 0 10px;
+            text-decoration: none;
+        }
+
+        .step-links .current {
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 class="item-list">Item List</h1>
+    <div class="item-list">
+        {% for item in items %}
+        <p class="item-name">{{ item.name }}</p>
+        {% endfor %}
+    </div>
+    <div class="step-links">
+        <span class="current">Page {{ items.number }} of {{ items.paginator.num_pages }}.</span>
+        {% if items.has_previous %}
+        <a href="?page=1" class="step-link">&laquo; first</a>
+        <a href="?page={{ items.previous_page_number }}" class="step-link">previous</a>
+        {% endif %}
+        {% if items.has_next %}
+        <a href="?page={{ items.next_page_number }}" class="step-link">next</a>
+        <a href="?page={{ items.paginator.num_pages }}" class="step-link">last &raquo;</a>
+        {% endif %}
+    </div>
+</body>
+
+</html>
+
+
